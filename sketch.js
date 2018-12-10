@@ -4,6 +4,7 @@ let lineStep = 24
 
 let oceanLines = []; // array of sline objects
 let bg,bg2;
+let picwid,pichei;
 function preload(){
 	bg = loadImage('img/bg.jpg');
   bg2 = loadImage('img/bgm.jpg');
@@ -11,8 +12,16 @@ function preload(){
 
 
 function setup() {
-  	cnv = createCanvas(windowWidth,windowHeight).parent('processing');
-	centerCanvas();
+  if(windowWidth<768){
+    pichei = windowWidth*16/9;
+    cnv = createCanvas(windowWidth,pichei).parent('processing');
+  }else{
+    pichei = windowWidth*9/16;
+    cnv = createCanvas(windowWidth,pichei).parent('processing');
+  }
+  //cnv = createCanvas(windowWidth,windowHeight).parent('processing');
+  picwid = windowWidth;
+	 centerCanvas();
   // Create objects
   for (var i=0; i<sunSize/lineStep; i++) {
     sunLines.push(new sline(i*lineStep));
@@ -35,10 +44,10 @@ function draw() {
 
   oceanLines[0].move();
   oceanLines[0].display();*/
-  if(windowWidth<768){
-    image(bg2,0,0,windowWidth,windowWidth*16/9);
+  if(displayWidth<768){
+    image(bg2,0,0,picwid,pichei);
   }else{
-    image(bg,0,0,windowWidth,windowWidth*9/16);
+    image(bg,0,0,picwid,pichei);
   }
 }
 
@@ -87,7 +96,7 @@ function centerCanvas() {
   cnv.position(x, y-20);
 }
 function windowResized() {
-  centerCanvas();
+  //centerCanvas();
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
 }
