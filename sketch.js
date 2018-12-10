@@ -12,7 +12,7 @@ function preload(){
 
 
 function setup() {
-  if(windowWidth<768){
+  if(displayWidth<768){
     pichei = windowWidth*16/9;
     cnv = createCanvas(windowWidth,pichei).parent('processing');
   }else{
